@@ -27,12 +27,42 @@ OPTIONS:
     -v, --version <version>    Git branch / mvn project version
 ```
 
+##Examples
+Change git branch and maven project version from project root:
+```
+>gm -v test123
+
+Checking if branch test123 already exists...
+Creating new git branch test123 from master
+ 
+Branch test123 successfully created from master
+
+Current mvn project version 0.0.1-SNAPSHOT
+Changing mvn project version to 0.0.1-test123-SNAPSHOT
+Done
+```
+
+Reset version:
+```
+> gm -r
+Current mvn project version 0.0.1-test123-SNAPSHOT
+Changing mvn project version to 0.0.1-SNAPSHOT
+Done
+```
+
+For debug output set flag `-d`.
+
 ## Installation
+Download latest precompiled executable (only for Linux) from [release page](https://github.com/d-kos/gm-utils/releases) and add to system path.
+Add executable to `PATH` in `~/.bashrc` or to `/usr/local/bin`.
+
 If you have Rust installed clone project and run `cargo install`. Set flag `--force` for upgrades.
+Or run command `curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git d-kos/gm-utils`. 
+
+Available only for Linux.
 
 ## TODO
-Add precompiled exec binary for installation
-
+- resolve current remote master branch pom version when invoking reset not only local
 
 ## License
 
