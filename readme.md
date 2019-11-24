@@ -27,7 +27,7 @@ OPTIONS:
     -v, --version <version>    Git branch / mvn project version
 ```
 
-##Examples
+## Examples
 Change git branch and maven project version from project root:
 ```
 >gm -v test123
