@@ -18,11 +18,20 @@ pub fn mvn_available() -> Result<()> {
 }
 
 pub fn validate_args(args: &CliArgs) -> Result<()> {
-    if args.reset && args.version.is_some() {
+    if !args.reset && args.new_version.is_none() {
         return Err(
             Error::new(
                 ErrorKind::InvalidInput,
-                format!("Can't reset and set new version {} at the same time", args.version.as_ref().unwrap()),
+                "No arguments provided!",
+            )
+        );
+    }
+
+    if args.reset && args.new_version.is_some() {
+        return Err(
+            Error::new(
+                ErrorKind::InvalidInput,
+                format!("Can't reset and set new version {} at the same time", args.new_version.as_ref().unwrap()),
             )
         );
     }

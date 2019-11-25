@@ -24,7 +24,7 @@ pub fn run(args: &CliArgs) -> io::Result<()> {
     log.f_debug("Project working dir =", &path);
 
     let mvn = Mvn::new(&args);
-    if let Some(ver) = &args.version {
+    if let Some(ver) = &args.new_version {
         let git = Git::open(path.clone(), &args)?;
         git.new_branch(ver)?;
         mvn.set_new_version(ver, path.clone())?;

@@ -13,24 +13,26 @@ Although there is a lot of options for this [use case](https://stackoverflow.com
 ## Usage
 ```
 ~> gm --help
-gm-utils 0.1.0
+   gm-utils 0.1.1
+   
+   USAGE:
+       gm [FLAGS] [new-version]
+   
+   FLAGS:
+       -d, --debug      Activate debug mode
+       -h, --help       Prints help information
+       -r, --reset      Reset maven project version
+       -V, --version    Prints version information
+   
+   ARGS:
+       <new-version>    Git branch / mvn project version
 
-USAGE:
-    gm [FLAGS] [OPTIONS]
-
-FLAGS:
-    -d, --debug    Activate debug mode
-    -h, --help     Prints help information
-    -r, --reset    Reset maven project version
-
-OPTIONS:
-    -v, --version <version>    Git branch / mvn project version
 ```
 
 ## Examples
 Change git branch and maven project version from project root:
 ```
->gm -v test123
+>gm test123
 
 Checking if branch test123 already exists...
 Creating new git branch test123 from master
@@ -62,7 +64,7 @@ Or run command `curl -LSfs https://japaric.github.io/trust/install.sh | sh -s --
 Available only for Linux.
 
 ## TODO
-- resolve current remote master branch pom version when invoking reset not only local
+- reset version to current remote project (master branch) version instead of local
 
 ## License
 

@@ -14,8 +14,8 @@ mod app;
 
 #[derive(StructOpt, Debug)]
 pub struct CliArgs {
-    #[structopt(short, long, help = "Git branch / mvn project version")]
-    version: Option<String>,
+    #[structopt(help = "Git branch / mvn project version")]
+    new_version: Option<String>,
     #[structopt(short, long, help = "Activate debug mode")]
     debug: bool,
     #[structopt(short, long, help = "Reset maven project version")]
