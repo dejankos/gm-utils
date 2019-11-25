@@ -55,13 +55,11 @@ Done
 For debug output set flag `-d`.
 
 ## Installation
-Download latest precompiled executable (only for Linux) from [release page](https://github.com/d-kos/gm-utils/releases) and add to system path.
+Download latest precompiled executable (Linux/OSX) from [release page](https://github.com/d-kos/gm-utils/releases) and add to system path.
 Add executable to `PATH` in `~/.bashrc` or to `/usr/local/bin`.
 
-If you have Rust installed clone project and run `cargo install`. Set flag `--force` for upgrades.
+If you have Rust installed clone project and run `cargo install`, set flag `--force` for upgrades.
 Or run command `curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git d-kos/gm-utils`. 
-
-Available only for Linux.
 
 ## TODO
 - reset version to current remote project (master branch) version instead of local
