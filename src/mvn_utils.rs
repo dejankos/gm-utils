@@ -73,25 +73,32 @@ impl Mvn {
     }
 
     fn find_version(&self, project_path: &PathBuf) -> Result<String> {
-        let res = file_utils::find_in_dir(&project_path, POM_FILE).unwrap();
-        let c = file_utils::read_file_content(&res)?;
-
-        self.parse_pom_ver(c).ok_or(Error::new(
-            ErrorKind::InvalidData,
-            "Failed to parse project version",
-        ))
+        if let Some(res) = file_utils::find_in_dir(&project_path, POM_FILE) {
+            let c = file_utils::read_file_content(&res)?;
+            self.parse_pom_ver(c).ok_or(Error::new(
+                ErrorKind::InvalidData,
+                "Failed to parse project version",
+            ))
+        } else {
+            Err(Error::new(ErrorKind::InvalidData, "Pom file not found"))
+        }
     }
 
     fn parse_pom_ver(&self, pom_xml: String) -> Option<String> {
-        let doc = Document::parse(pom_xml.as_str()).unwrap();
+        let doc = match Document::parse(pom_xml.as_str()) {
+            Ok(r) => r,
+            Err(_) => return None,
+        };
+
         for n in doc.root().descendants() {
-            //FIXME oh god why
             if n.is_element()
                 && n.has_tag_name("version")
                 && !n.parent().unwrap().has_tag_name("parent")
                 && n.text().is_some()
             {
-                return Some(n.text().unwrap().into());
+                if let Some(txt) = n.text() {
+                    return Some(txt.into());
+                }
             }
         }
 
