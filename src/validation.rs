@@ -19,21 +19,20 @@ pub fn mvn_available() -> Result<()> {
 
 pub fn validate_args(args: &CliArgs) -> Result<()> {
     if !args.reset && args.new_version.is_none() {
-        return Err(
-            Error::new(
-                ErrorKind::InvalidInput,
-                "No arguments provided!",
-            )
-        );
+        return Err(Error::new(
+            ErrorKind::InvalidInput,
+            "No arguments provided!",
+        ));
     }
 
     if args.reset && args.new_version.is_some() {
-        return Err(
-            Error::new(
-                ErrorKind::InvalidInput,
-                format!("Can't reset and set new version {} at the same time", args.new_version.as_ref().unwrap()),
-            )
-        );
+        return Err(Error::new(
+            ErrorKind::InvalidInput,
+            format!(
+                "Can't reset and set new version {} at the same time",
+                args.new_version.as_ref().unwrap()
+            ),
+        ));
     }
 
     Ok(())
@@ -44,13 +43,13 @@ fn command_available(cmd: &str) -> Result<()> {
         .arg(cmd)
         .output()
         .map_err(|e| e)
-        .and_then(|o|
+        .and_then(|o| {
             if o.stdout.is_empty() {
                 Err(Error::new(ErrorKind::Other, err_msg(&cmd)))
             } else {
                 Ok(())
             }
-        )
+        })
 }
 
 fn err_msg(cmd: &str) -> String {

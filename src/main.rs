@@ -5,12 +5,12 @@ use structopt::StructOpt;
 
 use crate::log::Logger;
 
-mod validation;
-mod log;
-mod git_utils;
-mod file_utils;
-mod mvn_utils;
 mod app;
+mod file_utils;
+mod git_utils;
+mod log;
+mod mvn_utils;
+mod validation;
 
 #[derive(StructOpt, Debug)]
 pub struct CliArgs {

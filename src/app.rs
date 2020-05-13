@@ -1,10 +1,9 @@
 use std::{env, io};
 
-use crate::{CliArgs, validation};
 use crate::git_utils::Git;
 use crate::log::Logger;
 use crate::mvn_utils::Mvn;
-
+use crate::{validation, CliArgs};
 
 pub fn run(args: &CliArgs) -> io::Result<()> {
     let log = Logger::new(args.debug, "app");
