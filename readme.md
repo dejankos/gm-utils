@@ -13,7 +13,7 @@ Although there is a lot of options for this [use case](https://stackoverflow.com
 ## Usage
 ```
 ~> gm --help
-   gm-utils 0.1.1
+   gm-utils 0.1.2
    
    USAGE:
        gm [FLAGS] [new-version]
@@ -32,24 +32,26 @@ Although there is a lot of options for this [use case](https://stackoverflow.com
 ## Examples
 Change git branch and maven project version from project root:
 ```
->gm test123
-
-Checking if branch test123 already exists...
-Creating new git branch test123 from master
- 
-Branch test123 successfully created from master
-
-Current mvn project version 0.0.1-SNAPSHOT
-Changing mvn project version to 0.0.1-test123-SNAPSHOT
-Done
+>gm test123 -d
+18:17:09 [DEBUG] (1) gm::app: Received cli args = CliArgs { new_version: Some("test123"), debug: true, reset: false }
+18:17:09 [DEBUG] (1) gm::app: Checking git is installed...
+18:17:09 [DEBUG] (1) gm::app: Git installed.
+18:17:09 [DEBUG] (1) gm::app: Checking maven is installed...
+18:17:09 [DEBUG] (1) gm::app: Maven installed.
+18:17:09 [DEBUG] (1) gm::app: Project working dir = "/home/user/current_project"
+18:17:09 [ INFO] Creating new git branch test123 from master
+18:17:09 [ INFO] Branch test successfully created from master
+18:17:09 [ INFO] Current mvn project version 0.0.1-SNAPSHOT
+18:17:09 [ INFO] Changing mvn project version to 0.0.1-test123-SNAPSHOT
+18:17:11 [ INFO] Done
 ```
 
 Reset version:
 ```
 > gm -r
-Current mvn project version 0.0.1-test123-SNAPSHOT
-Changing mvn project version to 0.0.1-SNAPSHOT
-Done
+18:23:27 [ INFO] Current mvn project version 0.0.1-test123-SNAPSHOT
+18:23:27 [ INFO] Changing mvn project version to 0.0.1-SNAPSHOT
+18:23:28 [ INFO] Done
 ```
 
 For debug output set flag `-d`.

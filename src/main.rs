@@ -1,14 +1,16 @@
+#[macro_use]
+extern crate log;
+extern crate simplelog;
+
 use std::process::exit;
 
 use exitcode::{OK, USAGE};
+use simplelog::{Config, LevelFilter, TermLogger, TerminalMode};
 use structopt::StructOpt;
-
-use crate::log::Logger;
 
 mod app;
 mod file_utils;
 mod git_utils;
-mod log;
 mod mvn_utils;
 mod validation;
 
@@ -24,15 +26,23 @@ pub struct CliArgs {
 
 fn main() {
     let args = CliArgs::from_args();
-    let log = Logger::new(args.debug, "main");
+    TermLogger::init(log_lvl(args.debug), Config::default(), TerminalMode::Mixed).unwrap();
     match app::run(&args) {
         Ok(_) => {
-            log.info("Done");
+            info!("Done");
             exit(OK);
         }
         Err(e) => {
-            log.error(&e);
+            error!("{}", &e);
             exit(USAGE);
         }
+    }
+}
+
+fn log_lvl(debug: bool) -> LevelFilter {
+    if debug {
+        LevelFilter::Debug
+    } else {
+        LevelFilter::Info
     }
 }

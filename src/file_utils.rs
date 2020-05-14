@@ -1,5 +1,5 @@
 use io::Result;
-use std::ffi::{OsString};
+use std::ffi::OsString;
 use std::fs::read_dir;
 use std::path::PathBuf;
 use std::{fs, io};

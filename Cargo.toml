@@ -1,6 +1,6 @@
 [package]
 name = "gm-utils"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Dejan Kos <com.dejan.kos@gmail.com>"]
 edition = "2018"
 license = "Apache-2.0"
@@ -12,7 +12,8 @@ description = "Cli tool for managing git branch and maven project version at the
 structopt = "0.3"
 roxmltree = "0.7.3"
 exitcode = "1.1.2"
-colored = "1.8"
+simplelog = "0.7.6"
+log = "0.4.8"
 
 [[bin]]
 name = "gm"

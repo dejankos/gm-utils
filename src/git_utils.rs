@@ -4,17 +4,12 @@ use std::io::{Error, ErrorKind};
 use std::path::PathBuf;
 use std::process::{Command, Output};
 
-use crate::log::Logger;
-use crate::CliArgs;
-
 const ERR_MSG: &str = "Error executing git command";
 
 pub struct Git {
-    log: Logger,
     repository: Repository,
 }
 
-#[derive(Debug)]
 pub struct Repository {
     project_path: PathBuf,
 }
@@ -39,35 +34,20 @@ impl OutputHandler for Output {
 }
 
 impl Git {
-    pub fn open(project_path: PathBuf, args: &CliArgs) -> Result<Self> {
+    pub fn open(project_path: PathBuf) -> Result<Self> {
         let repo = Repository::open(project_path)?;
-        Ok(Git {
-            log: Logger::new(args.debug, "git-utils"),
-            repository: repo,
-        })
+        Ok(Git { repository: repo })
     }
 
     pub fn new_branch(&self, b_name: &str) -> Result<()> {
-        self.log
-            .info(format!("Checking if branch {} already exists...", b_name).as_str());
         self.repository.branch_exists(b_name)?;
-
         let current_branch = self.repository.current_branch()?;
-        self.log.info(
-            format!(
-                "Creating new git branch {} from {} ",
-                b_name, current_branch
-            )
-            .as_str(),
-        );
+        info!("Creating new git branch {} from {}", b_name, current_branch);
 
         self.repository.new_branch(b_name, current_branch.trim())?;
-        self.log.info(
-            format!(
-                "Branch {} successfully created from {}",
-                b_name, current_branch
-            )
-            .as_str(),
+        info!(
+            "Branch {} successfully created from {}",
+            b_name, current_branch,
         );
 
         Ok(())
