@@ -22,9 +22,9 @@ pub fn run(args: &CliArgs) -> io::Result<()> {
     if let Some(ver) = &args.new_version {
         let git = Git::open(path.clone())?;
         git.new_branch(ver)?;
-        set_new_version(ver, path.clone())?;
+        set_new_version(ver, path)?;
     } else if args.reset {
-        reset_version(path.clone())?;
+        reset_version(path)?;
     }
 
     Ok(())

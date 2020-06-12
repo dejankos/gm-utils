@@ -1,6 +1,6 @@
 # Git-Maven (GM) Utils
 
-[![Build Status](https://travis-ci.com/d-kos/gm-utils.svg?branch=master)](https://travis-ci.com/d-kos/gm-utils)
+[![Build Status](https://travis-ci.com/dejankos/gm-utils.svg?branch=master)](https://travis-ci.com/dejankos/gm-utils)
 
 Cli tool for managing git branch version and Java maven project version at the same time.
 Although there is a lot of options for this [use case](https://stackoverflow.com/questions/13583953/deriving-maven-artifact-version-from-git-branch) my main motivation was to build a tool for managing git/maven project versions without any pre-requirements such as maven plugins.

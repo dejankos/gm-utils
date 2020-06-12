@@ -13,7 +13,7 @@ const POM_FILE: &str = "pom.xml";
 
 pub fn set_new_version(ver: &str, project_path: PathBuf) -> Result<()> {
     let split: Vec<String> = split_current_ver(&project_path)?;
-    let new_version = String::from(format!("{}-{}-{}", split[0], ver, split[1]));
+    let new_version = format!("{}-{}-{}", split[0], ver, split[1]);
     info!("Changing mvn project version to {}", &new_version);
 
     change_version(&new_version, &project_path)
@@ -30,7 +30,7 @@ pub fn reset_version(project_path: PathBuf) -> Result<()> {
 fn split_current_ver(project_path: &PathBuf) -> Result<Vec<String>> {
     let current_ver = find_version(&project_path)?;
     info!("Current mvn project version {}", current_ver);
-    let split: Vec<String> = current_ver.split("-").map(|s| s.to_string()).collect();
+    let split: Vec<String> = current_ver.split('-').map(|s| s.to_string()).collect();
 
     Ok(split)
 }
@@ -60,7 +60,7 @@ fn change_version(new_version: &str, project_path: &PathBuf) -> Result<()> {
 fn find_version(project_path: &PathBuf) -> Result<String> {
     if let Some(res) = file_utils::find_in_dir(&project_path, POM_FILE) {
         let c = file_utils::read_file_content(&res)?;
-        parse_pom_ver(c).ok_or(Error::new(
+        parse_pom_ver(c).ok_or_else(|| Error::new(
             ErrorKind::InvalidData,
             "Failed to parse project version",
         ))
