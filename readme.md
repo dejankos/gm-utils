@@ -61,7 +61,7 @@ Download latest precompiled executable (Linux|WSL2/OSX) from [release page](http
 Add executable to `PATH` in `~/.bashrc` or to `/usr/local/bin`.
 
 If you have Rust installed clone project and run `cargo install`, set flag `--force` for upgrades.
-Or run command `curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git d-kos/gm-utils`. 
+Or run command `curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git dejankos/gm-utils`. 
 
 ## License
 
